@@ -1,0 +1,24 @@
+{
+  "name": "@sysreptor/multi-design-outputs",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "generate": "nuxt generate",
+    "postinstall": "nuxt prepare",
+    "typecheck": "nuxt typecheck"
+  },
+  "dependencies": {
+    "@sysreptor/nuxt-base-layer": "file:../../../sysreptor-src/packages/nuxt-base-layer",
+    "@sysreptor/plugin-base-layer": "file:../../../sysreptor-src/packages/plugin-base-layer",
+    "nuxt": "~4.6.0",
+    "pinia": "^4.0.0",
+    "pinia-plugin-persistedstate": "^4.7.1",
+    "vuetify": "~4.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.19.2",
+    "sass-embedded": "^1.108.2",
+    "typescript": "^5.9.0",
+    "vue-tsc": "^3.0.4"
+  }
+}

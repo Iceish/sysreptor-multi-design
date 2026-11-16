@@ -1,0 +1,11 @@
+.git
+.env*
+**/node_modules
+**/.nuxt
+**/.output
+**/__pycache__
+artifacts
+sysreptor-src/.git
+sysreptor-src/packages/*/node_modules
+**/frontend/dist
+**/static

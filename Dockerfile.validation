@@ -1,0 +1,6 @@
+# Local integration harness: current backend source over an official runtime.
+# Production images must be built from the pinned full upstream source (scripts/dev.sh).
+FROM syslifters/sysreptor:2026.97@sha256:189cb4ce75ebc45bc9562f72daf467e757149404df1c22d04c49f33ff7190f93
+USER 0
+RUN pip install --no-cache-dir 'taskiq~=0.13.0' 'taskiq-redis~=1.2'
+USER 1000

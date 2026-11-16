@@ -1,0 +1,43 @@
+name: multidesign-dev
+services:
+  db:
+    image: postgres:17.11-bookworm
+    environment:
+      POSTGRES_USER: multidesign
+      POSTGRES_DB: multidesign
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD:?Run scripts/dev.sh init}
+    volumes: [db-data:/var/lib/postgresql/data]
+    healthcheck:
+      test: [CMD-SHELL, pg_isready -U multidesign]
+      interval: 2s
+      timeout: 5s
+      retries: 30
+  redis:
+    image: redis:7.4.11-bookworm
+  app:
+    build: .
+    image: multidesign-plugin:local
+    init: true
+    env_file: .env.dev
+    environment:
+      DATABASE_HOST: db
+      DATABASE_NAME: multidesign
+      DATABASE_USER: multidesign
+      REDIS_URL: redis://redis:6379/0
+      ENABLED_PLUGINS: multidesign
+      ALLOWED_HOSTS: localhost,127.0.0.1
+      PDF_RENDERING_TIME_LIMIT: '300'
+    ports: ['127.0.0.1:8800:8000']
+    healthcheck:
+      test: [CMD, curl, -f, 'http://localhost:8000/api/public/utils/healthcheck/']
+      interval: 2s
+      timeout: 5s
+      retries: 30
+      start_period: 10s
+    volumes: [app-data:/data, ./artifacts:/artifacts]
+    depends_on:
+      db: {condition: service_healthy}
+      redis: {condition: service_started}
+volumes:
+  db-data:
+  app-data:

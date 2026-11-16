@@ -1,0 +1,18 @@
+{
+  "report_sections": [{"id":"report","label":"Report","fields":[
+    {"id":"title","type":"string","label":"Title","default":"Synthetic security assessment"},
+    {"id":"executive_summary","type":"markdown","label":"Executive summary","required":false},
+    {"id":"slide_summary","type":"markdown","label":"Presentation summary","required":false}
+  ]}],
+  "finding_fields": [
+    {"id":"title","type":"string","label":"Title"},
+    {"id":"severity","type":"enum","label":"Severity","choices":[
+      {"value":"critical","label":"Critical"},{"value":"high","label":"High"},
+      {"value":"medium","label":"Medium"},{"value":"low","label":"Low"},{"value":"info","label":"Informational"}
+    ],"default":"medium"},
+    {"id":"description","type":"markdown","label":"Technical description","required":false},
+    {"id":"recommendation","type":"markdown","label":"Recommendation","required":false},
+    {"id":"slide_summary","type":"markdown","label":"Short presentation summary","required":false},
+    {"id":"include_in_presentation","type":"boolean","label":"Include in presentation","default":true}
+  ]
+}

@@ -1,0 +1,6 @@
+@import '/assets/global/base.css';
+@page { size: A4 portrait; margin: 22mm; }
+body { font-family: sans-serif; font-size: 11pt; }
+h1 { color: #16324f; }
+article { break-before: page; }
+img { max-width: 100%; }

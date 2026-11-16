@@ -1,0 +1,10 @@
+@import '/assets/global/base.css';
+@page { size: 320mm 180mm; margin: 15mm; }
+body { font-family: sans-serif; font-size: 20pt; color: #16324f; }
+.slide { break-before: page; position: relative; }
+.slide:first-child { break-before: auto; }
+h1 { font-size: 30pt; line-height: 1.15; margin: 0 0 10mm; }
+h2 { font-size: 23pt; }
+.severity { color: #b33030; font-weight: bold; text-transform: uppercase; }
+.footer { font-size: 11pt; margin-top: 10mm; color: #555; }
+/* Intentionally no hidden overflow: excessive text flows onto extra pages. */

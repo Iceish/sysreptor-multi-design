@@ -1,0 +1,12 @@
+<section>
+  <h1>{{ report.title }}</h1>
+  <h2>Executive summary</h2>
+  <markdown :text="report.executive_summary" />
+  <h2>Findings</h2>
+  <article v-for="finding in findings" :key="finding.id">
+    <h2>{{ finding.title }} — {{ finding.severity.label }}</h2>
+    <markdown :text="finding.description" />
+    <h3>Recommendation</h3>
+    <markdown :text="finding.recommendation" />
+  </article>
+</section>

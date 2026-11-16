@@ -1,0 +1,12 @@
+<section class="slide">
+  <h1>{{ report.title }}</h1>
+  <h2>Executive overview</h2>
+  <markdown :text="report.slide_summary" />
+  <p>{{ findings.length }} total findings · {{ findings.filter(f => ['critical', 'high'].includes(f.severity.value)).length }} high or critical</p>
+</section>
+<section class="slide" v-for="finding in findings.filter(f => f.include_in_presentation)" :key="finding.id">
+  <p class="severity">{{ finding.severity.label }}</p>
+  <h1>{{ finding.title }}</h1>
+  <markdown :text="finding.slide_summary" />
+  <p class="footer">Synthetic demonstration · {{ report.title }}</p>
+</section>

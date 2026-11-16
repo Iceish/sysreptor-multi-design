@@ -1,0 +1,35 @@
+# Local test harness, no published ports, independent volumes and project name.
+name: multidesign-validation
+services:
+  db:
+    image: postgres:17.11-bookworm
+    environment:
+      POSTGRES_USER: multidesign
+      POSTGRES_DB: multidesign
+      POSTGRES_HOST_AUTH_METHOD: trust
+    healthcheck:
+      test: [CMD-SHELL, pg_isready -U multidesign]
+      interval: 2s
+      timeout: 5s
+      retries: 30
+    tmpfs: [/var/lib/postgresql/data]
+  test:
+    build: {context: ., dockerfile: Dockerfile.validation}
+    image: multidesign-validation:local
+    entrypoint: [python3]
+    command: [manage.py, check]
+    environment:
+      DATABASE_HOST: db
+      DATABASE_NAME: multidesign
+      DATABASE_USER: multidesign
+      PLUGIN_DIRS: /custom_plugins
+      ENABLED_PLUGINS: multidesign
+      DJANGO_SETTINGS_MODULE: sysreptor.conf.settings_test
+      SECRET_KEY: synthetic-local-validation-only
+    volumes:
+      - ./sysreptor-src/api/src:/app/api/src:ro
+      - ./custom_plugins:/custom_plugins:ro
+      - ./examples:/examples:ro
+      - ./artifacts:/artifacts
+    depends_on:
+      db: {condition: service_healthy}
